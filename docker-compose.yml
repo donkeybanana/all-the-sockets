@@ -1,0 +1,14 @@
+version: "3"
+services:
+  ats-elixir:
+    image: ats-elixir
+    build:
+      context: ./elixir
+    ports:
+      - 8081:8081
+  ats-node:
+    image: ats-node
+    build:
+      context: ./node
+    ports:
+      - 8082:8081
