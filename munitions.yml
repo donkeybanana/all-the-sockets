@@ -1,12 +1,17 @@
 config:
   target: "ws://127.0.0.1:8081/"
   phases:
-    - duration: 60
+    - duration: 15
       arrivalRate: 100
-      rampTo: 1000
+      name: "Low"
+    - duration: 15
+      arrivalRate: 500
+      name: "Med"
+    - duration: 15
+      arrivalRate: 1000
       name: "Fire in the hole!"
 scenarios:
   - engine: "ws"
     flow:
       - send:
-          type: 'boleh'
+          type: "boleh"
