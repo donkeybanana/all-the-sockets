@@ -1,14 +1,26 @@
 version: "3"
 services:
+  ats-rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:15672
+      - 15672:15672
+    hostname: ats-rabbit
+    environment:
+      RABBITMQ_ERLANG_COOKIE: all-the-sockets
   ats-elixir:
     image: ats-elixir
     build:
       context: ./elixir
     ports:
       - 8081:8081
+    hostname: ats-elixir
+    environment:
+      RELEASE_COOKIE: all-the-sockets
   ats-node:
     image: ats-node
     build:
       context: ./node
     ports:
       - 8082:8081
+    hostname: ats-node
