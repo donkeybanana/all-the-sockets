@@ -1,5 +1,5 @@
 config:
-  target: "ws://127.0.0.1:8081/"
+  target: "ws://127.0.0.1:8081/ws"
   phases:
     - duration: 15
       arrivalRate: 100

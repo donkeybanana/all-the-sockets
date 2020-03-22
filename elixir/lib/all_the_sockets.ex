@@ -12,6 +12,10 @@ defmodule AllTheSockets do
           dispatch: dispatch(),
           port: 8081
         ]
+      ),
+      Registry.child_spec(
+        keys: :duplicate,
+        name: Registry.AllTheSockets
       )
     ]
 
@@ -24,9 +28,9 @@ defmodule AllTheSockets do
     [
       {:_,
        [
-         {:_, AllTheSockets.SocketHandler, []}
-       ]
-      }
+         {"/ws", AllTheSockets.SocketHandler, []},
+         {:_, Plug.Cowboy.Handler, {AllTheSockets.Router, []}}
+       ]}
     ]
   end
 end

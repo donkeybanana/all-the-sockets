@@ -1,24 +1,17 @@
-const WS = require("ws");
+const http = require("http");
+const express = require("express");
+const web = require("./routes/web.js");
+const useSockets = require("./routes/sockets.js");
+const app = express();
+const server = http.createServer(app);
 
-const server = new WS.Server({
-  port: 8081
-});
+// Sockets
+const wss = useSockets(server);
 
-console.log("Listening on", 8081);
+// HTTP
+app.use("/", web(wss));
 
-server.on("connection", conn => {
-  conn.on("message", data => {
-    const message = JSON.parse(data);
-
-    switch (message.type) {
-      case "boleh":
-        console.log("[receive] boleh");
-        conn.send(
-          JSON.stringify({
-            message: "WebSockets boleh!"
-          })
-        );
-        break;
-    }
-  });
-});
+// Bind
+const { PORT = 8081 } = process.env;
+server.listen(PORT);
+console.log("Listening on", PORT);

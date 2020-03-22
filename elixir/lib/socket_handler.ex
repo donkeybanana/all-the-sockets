@@ -6,6 +6,9 @@ defmodule AllTheSockets.SocketHandler do
   end
 
   def websocket_init(state) do
+    Registry.AllTheSockets
+    |> Registry.register("all-the-sockets", {})
+
     {:ok, state}
   end
 
@@ -13,7 +16,7 @@ defmodule AllTheSockets.SocketHandler do
     payload = Jason.decode!(json)
     type = payload["type"]
 
-    IO.puts("[receive] #{type}")
+    IO.puts("[ats-elixir](ws): type=#{type}")
 
     message =
       case type do
