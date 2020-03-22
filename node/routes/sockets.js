@@ -9,15 +9,16 @@ module.exports = server => {
     conn.on("message", data => {
       const message = JSON.parse(data);
 
-      console.log(`[ats-node](ws): type=${message.type}`);
+      console.log(`[ats-node](ws): ${data}`);
 
       switch (message.type) {
-        case "boleh":
-          conn.send(
-            JSON.stringify({
-              message: "WebSockets boleh!"
-            })
-          );
+        case "join":
+          conn.send(`Welcome, ${message.name}!`);
+          wss.clients.forEach(function each(client) {
+            if (client !== conn && client.readyState === WS.OPEN) {
+              client.send(`${message.name} joined! Give them a warm welcome!`);
+            }
+          });
           break;
       }
     });

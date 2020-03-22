@@ -1,3 +1,4 @@
+const path = require("path");
 const WS = require("ws");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -6,9 +7,7 @@ const router = express.Router();
 module.exports = wss => {
   router.get("/", (req, res) => {
     console.log(`[ats-node](web): GET /`);
-
-    // Ack
-    res.end("???");
+    res.sendFile(path.join(__dirname, "../../common", "index.html"));
   });
 
   router.post("/", bodyParser.text({ type: "*/*" }), (req, res) => {

@@ -22,6 +22,7 @@ defmodule AllTheSockets.Router do
   end
 
   match _ do
-    send_resp(conn, 200, index_template())
+    conn
+    |> Plug.Conn.send_file(200, "priv/static/index.html")
   end
 end
