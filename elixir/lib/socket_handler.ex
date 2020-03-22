@@ -16,12 +16,16 @@ defmodule AllTheSockets.SocketHandler do
     payload = Jason.decode!(json)
     type = payload["type"]
 
-    IO.puts("[ats-elixir](ws): type=#{type}")
+    IO.puts("[ats-elixir](ws): #{inspect(payload)}")
 
     message =
       case type do
-        "boleh" ->
-          "Websockets boleh!"
+        "join" ->
+          name = payload["name"]
+
+          AllTheSockets.broadcast("#{name} joined! Give them a warm welcome!", self())
+
+          "Welcome, #{name}!"
 
         _ ->
           "???"

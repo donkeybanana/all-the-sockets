@@ -33,4 +33,15 @@ defmodule AllTheSockets do
        ]}
     ]
   end
+
+  def broadcast(message, ignore \\ nil) do
+    Registry.AllTheSockets
+    |> Registry.dispatch("all-the-sockets", fn clients ->
+      for {pid, _} <- clients do
+        if pid != ignore do
+          Process.send(pid, message, [])
+        end
+      end
+    end)
+  end
 end
