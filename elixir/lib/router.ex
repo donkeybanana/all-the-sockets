@@ -9,8 +9,6 @@ defmodule AllTheSockets.Router do
 
   require EEx
 
-  EEx.function_from_file(:defp, :index_template, "lib/index.eex", [])
-
   post "/" do
     {:ok, message, _} = Plug.Conn.read_body(conn)
 
