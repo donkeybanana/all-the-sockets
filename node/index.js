@@ -1,4 +1,3 @@
-const path = require("path");
 const http = require("http");
 const express = require("express");
 const web = require("./routes/web.js");
@@ -11,7 +10,7 @@ const wss = useSockets(server);
 
 // HTTP
 app.use("/", web(wss));
-app.use(express.static(path.join(__dirname, "/../common")));
+app.use(express.static("public"));
 
 // Bind
 const { PORT = 8081 } = process.env;

@@ -7,7 +7,7 @@ const router = express.Router();
 module.exports = wss => {
   router.get("/", (req, res) => {
     console.log(`[ats-node](web): GET /`);
-    res.sendFile(path.join(__dirname, "../../common", "index.html"));
+    res.sendFile(path.join(__dirname, "public", "index.html"));
   });
 
   router.post("/", bodyParser.text({ type: "*/*" }), (req, res) => {

@@ -9,7 +9,7 @@ services:
     environment:
       RABBITMQ_ERLANG_COOKIE: all-the-sockets
   ats-elixir:
-    image: ats-elixir
+    image: donkeybanana/ats-elixir
     build:
       context: ./elixir
     ports:
@@ -18,7 +18,7 @@ services:
     environment:
       RELEASE_COOKIE: all-the-sockets
   ats-node:
-    image: ats-node
+    image: donkeybanana/ats-node
     build:
       context: ./node
     ports:
